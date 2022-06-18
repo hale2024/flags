@@ -1,0 +1,7 @@
+leviathan1
+- password: rioGegei8m
+- look for leviathan in bookmarks.html
+leviathan2
+- password: ougahZi8Ta
+- open binary in gdb, check disassembly and look for the strings in main's stack
+  frame: $ebp-{0x10, 0x17, 0x13, 0x11, 0x1b, 0x20}

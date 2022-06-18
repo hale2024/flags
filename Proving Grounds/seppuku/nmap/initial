@@ -1,0 +1,21 @@
+# Nmap 7.92 scan initiated Wed Jun 15 06:51:50 2022 as: nmap -p 21,80,22 -sC -sV -oN nmap/initial 192.168.98.90
+Nmap scan report for 192.168.98.90
+Host is up (0.17s latency).
+
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 cd:55:a8:e4:0f:28:bc:b2:a6:7d:41:76:bb:9f:71:f4 (RSA)
+|   256 16:fa:29:e4:e0:8a:2e:7d:37:d2:6f:42:b2:dc:e9:22 (ECDSA)
+|_  256 bb:74:e8:97:fa:30:8d:da:f9:5c:99:f0:d9:24:8a:d5 (ED25519)
+80/tcp open  http    nginx 1.14.2
+| http-auth: 
+| HTTP/1.1 401 Unauthorized\x0D
+|_  Basic realm=Restricted Content
+|_http-server-header: nginx/1.14.2
+|_http-title: 401 Authorization Required
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Jun 15 06:52:05 2022 -- 1 IP address (1 host up) scanned in 15.33 seconds

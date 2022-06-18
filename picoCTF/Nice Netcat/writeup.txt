@@ -1,0 +1,10 @@
+put the output into a file, read the file using python and printed the
+individual digits as string
+
+{{{python
+    file = open("reply.txt", "r")
+    chars = [file_stripped.strip() for file_stripped in file.readlines()]
+
+    for i in range(0, len(chars)):
+        print(chr(int(chars[i])), end = "")
+}}}

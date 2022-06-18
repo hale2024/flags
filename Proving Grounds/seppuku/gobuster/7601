@@ -1,0 +1,26 @@
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://seppuku:7601
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/dirb/wordlists/small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2022/06/15 07:56:28 Starting gobuster in directory enumeration mode
+===============================================================
+/a                    (Status: 301) [Size: 305] [--> http://seppuku:7601/a/]
+/b                    (Status: 301) [Size: 305] [--> http://seppuku:7601/b/]
+/c                    (Status: 301) [Size: 305] [--> http://seppuku:7601/c/]
+/database             (Status: 301) [Size: 312] [--> http://seppuku:7601/database/]
+/d                    (Status: 301) [Size: 305] [--> http://seppuku:7601/d/]       
+/e                    (Status: 301) [Size: 305] [--> http://seppuku:7601/e/]       
+/production           (Status: 301) [Size: 314] [--> http://seppuku:7601/production/]
+/secret               (Status: 301) [Size: 310] [--> http://seppuku:7601/secret/]    
+/w                    (Status: 301) [Size: 305] [--> http://seppuku:7601/w/]         
+===============================================================
+2022/06/15 07:56:45 Finished
+===============================================================

@@ -1,0 +1,26 @@
+# Nmap 7.92 scan initiated Wed Jun 15 08:20:29 2022 as: nmap -Pn -T5 -p 8088,7601,7080 -sC -sV -oN nmap/detailed seppuku
+Nmap scan report for seppuku (192.168.98.90)
+Host is up (0.17s latency).
+
+PORT     STATE SERVICE  VERSION
+7080/tcp open  ssl/http LiteSpeed httpd
+|_http-title:  404 Not Found
+| ssl-cert: Subject: commonName=seppuku/organizationName=LiteSpeedCommunity/stateOrProvinceName=NJ/countryName=US
+| Not valid before: 2020-05-13T06:51:35
+|_Not valid after:  2022-08-11T06:51:35
+| tls-alpn: 
+|   h2
+|   spdy/3
+|   spdy/2
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+|_http-server-header: LiteSpeed
+7601/tcp open  http     Apache httpd 2.4.38 ((Debian))
+|_http-title: Seppuku
+|_http-server-header: Apache/2.4.38 (Debian)
+8088/tcp open  http     LiteSpeed httpd
+|_http-title: Seppuku
+|_http-server-header: LiteSpeed
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Jun 15 08:21:04 2022 -- 1 IP address (1 host up) scanned in 34.90 seconds

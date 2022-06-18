@@ -1,0 +1,2 @@
+I used `strings` and passed it this file. Apparently, we only needed to pass the
+`-h` flag.

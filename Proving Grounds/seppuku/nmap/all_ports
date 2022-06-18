@@ -1,0 +1,22 @@
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-15 07:28 +0545
+Stats: 0:00:05 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 1.23% done; ETC: 07:35 (0:06:41 remaining)
+Stats: 0:00:06 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 1.59% done; ETC: 07:35 (0:06:12 remaining)
+Warning: 192.168.98.90 giving up on port because retransmission cap hit (2).
+Stats: 0:05:52 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 78.84% done; ETC: 07:36 (0:01:34 remaining)
+Nmap scan report for seppuku (192.168.98.90)
+Host is up (0.17s latency).
+Not shown: 65033 closed tcp ports (conn-refused), 494 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+80/tcp   open  http
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+7080/tcp open  empowerid
+7601/tcp open  unknown
+8088/tcp open  radan-http
+
+Nmap done: 1 IP address (1 host up) scanned in 448.84 seconds

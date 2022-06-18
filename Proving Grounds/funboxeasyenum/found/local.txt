@@ -1,0 +1,5 @@
+<ip>/mini.php
+
+/var/www/local.txt
+
+3b5290a7ef739f754b6c7a0b0fb0ef7a
