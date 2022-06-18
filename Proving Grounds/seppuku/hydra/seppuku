@@ -1,0 +1,2 @@
+# Hydra v9.3 run at 2022-06-18 14:01:21 on seppuku ssh (hydra -o hydra/seppuku -l seppuku -P seppuku:7601/secret/password.lst seppuku ssh)
+[22][ssh] host: seppuku   login: seppuku   password: eeyoree
