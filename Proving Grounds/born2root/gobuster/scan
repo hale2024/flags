@@ -1,0 +1,21 @@
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://born2root
+[+] Method:                  GET
+[+] Threads:                 60
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2022/06/21 14:07:55 Starting gobuster in directory enumeration mode
+===============================================================
+/files                (Status: 301) [Size: 306] [--> http://born2root/files/]
+/icons                (Status: 301) [Size: 306] [--> http://born2root/icons/]
+/manual               (Status: 301) [Size: 307] [--> http://born2root/manual/]
+/server-status        (Status: 403) [Size: 297]                               
+===============================================================
+2022/06/21 14:11:09 Finished
+===============================================================

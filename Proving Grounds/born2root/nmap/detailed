@@ -1,0 +1,39 @@
+# Nmap 7.92 scan initiated Mon Jun 20 21:53:28 2022 as: nmap -p 111,48777,22,80 -sC -sV -O -T4 -Pn -oN nmap/all_ports born2root
+Nmap scan report for born2root (192.168.1.7)
+Host is up (0.0072s latency).
+
+PORT      STATE SERVICE VERSION
+22/tcp    open  ssh     OpenSSH 6.7p1 Debian 5+deb8u3 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 3d:6f:40:88:76:6a:1d:a1:fd:91:0f:dc:86:b7:81:13 (DSA)
+|   2048 eb:29:c0:cb:eb:9a:0b:52:e7:9c:c4:a6:67:dc:33:e1 (RSA)
+|   256 d4:02:99:b0:e7:7d:40:18:64:df:3b:28:5b:9e:f9:07 (ECDSA)
+|_  256 e9:c4:0c:6d:4b:15:4a:58:4f:69:cd:df:13:76:32:4e (ED25519)
+80/tcp    open  http    Apache httpd 2.4.10 ((Debian))
+| http-robots.txt: 2 disallowed entries 
+|_/wordpress-blog /files
+|_http-title:  Secretsec Company 
+|_http-server-header: Apache/2.4.10 (Debian)
+111/tcp   open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          34283/udp   status
+|   100024  1          43795/udp6  status
+|   100024  1          48777/tcp   status
+|_  100024  1          53482/tcp6  status
+48777/tcp open  status  1 (RPC #100024)
+MAC Address: 08:00:27:FB:C3:3C (Oracle VirtualBox virtual NIC)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Linux 3.X|4.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Jun 20 21:53:44 2022 -- 1 IP address (1 host up) scanned in 18.83 seconds
