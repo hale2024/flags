@@ -1,3 +1,4 @@
 **/*.ovpn
 **/*secrets*
 **/*wordlists*
+**/*hash_extender*
