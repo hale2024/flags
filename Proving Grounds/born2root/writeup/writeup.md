@@ -147,8 +147,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 */5   * * * *   jimmy   python /tmp/sekurity.py
 ```
 
-And interestingly a cronjob had been there. I just fetched a reverse shell from
-[[https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md|PayloadAllTheThings]]:
+And interestingly a cronjob had been there. I just fetched a reverse shell from [PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md):
 
 ```python
 import socket
@@ -215,9 +214,11 @@ require a smaller wordlist since something like `rockyou.txt` is going to take
 forever. I decided to check if the `rockyou.txt` wordlist had any passwords with
 the word `hadi` in it and apparently there were some. I decided to try my luck
 with those matched entries.
-{{file:./hydra.png}}
+![Hydra](hydra.png)
 
-And success! Although I didn't expect it to, but it did work. Now I can ssh
+And success!
+
+Although I didn't expect it to, but it did work. Now I can ssh
 login as `hadi` on that machine. I tried running `su` with the same password and
 apparently it worked as well. So that's how the root flag was discovered. A lot
 of rabbit holes, but apparently enumeration _was_ the key here.
