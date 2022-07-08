@@ -1,0 +1,19 @@
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-06 16:15 +0545
+Nmap scan report for stapler (192.168.219.148)
+Host is up (0.16s latency).
+Not shown: 65523 filtered tcp ports (no-response)
+PORT      STATE  SERVICE
+20/tcp    closed ftp-data
+21/tcp    open   ftp
+22/tcp    open   ssh
+53/tcp    open   domain
+80/tcp    open   http
+123/tcp   closed ntp
+137/tcp   closed netbios-ns
+138/tcp   closed netbios-dgm
+139/tcp   open   netbios-ssn
+666/tcp   open   doom
+3306/tcp  open   mysql
+12380/tcp open   unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 202.70 seconds

@@ -1,0 +1,41 @@
+# Nmap 7.92 scan initiated Wed Jul  6 17:03:20 2022 as: nmap -p 12380,80,3306,666,21 -sC -sV -oN nmap/detail stapler
+Nmap scan report for stapler (192.168.1.14)
+Host is up (0.0013s latency).
+
+PORT      STATE SERVICE    VERSION
+21/tcp    open  ftp        vsftpd 2.0.8 or later
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 192.168.1.8
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 2
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_Can't get directory listing: PASV failed: 550 Permission denied.
+80/tcp    open  http       PHP cli server 5.5 or later
+|_http-title: 404 Not Found
+666/tcp   open  tcpwrapped
+3306/tcp  open  mysql      MySQL 5.7.12-0ubuntu1
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.7.12-0ubuntu1
+|   Thread ID: 22
+|   Capabilities flags: 63487
+|   Some Capabilities: SupportsTransactions, IgnoreSigpipes, Speaks41ProtocolOld, LongPassword, SupportsCompression, FoundRows, Support41Auth, LongColumnFlag, Speaks41ProtocolNew, IgnoreSpaceBeforeParenthesis, ConnectWithDatabase, ODBCClient, DontAllowDatabaseTableColumn, SupportsLoadDataLocal, InteractiveClient, SupportsMultipleResults, SupportsMultipleStatments, SupportsAuthPlugins
+|   Status: Autocommit
+|   Salt: \x08\x04%\x170O\x1A\x06
+| 2c\x0Ej#8\x17eCO|
+|_  Auth Plugin Name: mysql_native_password
+12380/tcp open  http       Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Tim, we need to-do better next year for Initech
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Jul  6 17:03:38 2022 -- 1 IP address (1 host up) scanned in 17.27 seconds
