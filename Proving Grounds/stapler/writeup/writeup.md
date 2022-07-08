@@ -3,7 +3,7 @@ I downloaded the box from VulnHub, and created a virtual machine giving it a
 bridged adapter. The machine's IP address has been aliased to `stapler` within
 my `/etc/hosts` file. However, you may find different IPs referring to `stapler`
 throughout the writeup. This because sometimes I'm doing the machine from the
-Proving Grounds website as well. It could be because I'm a mess.
+Proving Grounds website as well. It could also be because I'm a mess.
 
 # Reconnaissance
 Going with the ritual, I use `nmap` to scan all of the ports.
