@@ -27,7 +27,8 @@ mov rsi, rax
 mov rax, SYS_sendfile
 mov rdi, 1
 mov rdx, 0
-mov rcx, 1000
+// flag is 55 chars long
+mov rcx, 55
 syscall
 
 // exit(0)
