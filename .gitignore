@@ -2,3 +2,5 @@
 **/*secrets*
 **/*wordlists*
 **/*hash_extender*
+**/*.raw
+**/*.elf
