@@ -15,7 +15,7 @@ warnings.simplefilter("ignore")
 
 assembly = str()
 assembly += shellcraft.fchmodat(3, "flag", 0o0777)
-assembly += shellcraft.exit(0);
+assembly += shellcraft.exit(0)
 
 # the hostname will always be the same as challenge binary
 
