@@ -9,7 +9,7 @@ warnings.simplefilter("ignore")
 # this will contain the flag
 flag = str()
 # number of characters in the flag
-flag_bytes = 0x55
+flag_bytes = 55
 # the hostname will always be the same as challenge binary
 challenge_binary = os.getenv('HOSTNAME')
 
